@@ -1,35 +1,44 @@
 #!/bin/bash
 
+# Exit if any command fails and treat unset variables as an error
+set -eu
+
 # Function to execute a command and print a custom error message if it fails
 execute() {
     echo "$2"
-    if ! $1; then
-        echo "Error: $3"
-        exit 1
-    fi
+    $1
 }
 
+# Ensure the script is being run with superuser privileges
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
+
 # Update the system
-execute "sudo pacman -Syu" "Updating the system..." "System update failed"
+execute "pacman -Syu" "Updating the system..."
 
 # Install Docker using yay
-execute "yay -S docker" "Installing Docker..." "Docker installation failed"
+execute "yay -S docker" "Installing Docker..."
 
 # Start Docker service
-execute "sudo systemctl start docker" "Starting Docker service..." "Starting Docker service failed"
+execute "systemctl start docker" "Starting Docker service..."
 
 # Enable Docker service to start on boot
-execute "sudo systemctl enable docker" "Enabling Docker service to start on boot..." "Enabling Docker service failed"
+execute "systemctl enable docker" "Enabling Docker service to start on boot..."
 
 # Create docker group if it doesn't already exist
 if ! grep -q "^docker:" /etc/group; then
-    execute "sudo groupadd docker" "Creating docker group..." "Creating docker group failed"
+    execute "groupadd docker" "Creating docker group..."
 else
     echo "Docker group already exists"
 fi
 
 # Add the current user to the docker group
-execute "sudo usermod -aG docker $USER" "Adding the current user to the docker group..." "Adding current user to docker group failed"
+execute "usermod -aG docker $USER" "Adding the current user to the docker group..."
+
+# Install Docker Compose
+execute "yay -S docker-compose" "Installing Docker Compose..."
 
 # Notify the user to log out and log back in for the changes to take effect
 echo "Please log out and log back in for the changes to take effect."
