@@ -4,8 +4,8 @@
 set -eu
 
 # Define the source and destination directories
-src_dir="$HOME/Desktop"
-dst_dir="$HOME/snapshots"
+src_dir="/home"
+dst_dir="/opt/snapshots"
 
 # Ensure the destination directory exists
 mkdir -p "$dst_dir"
@@ -18,3 +18,4 @@ btrfs subvolume snapshot "$src_dir" "$dst_dir/desktop_snapshot_$(date +%Y%m%d%H%
 # @reboot $HOME/snapshots/snapshot.sh
 # Every 12 hours take a snapshot
 # 0 */12 * * * $HOME/snapshots/snapshot.sh
+@reboot /home/greg/Documents/github-repos/bash/scripts/snapshot-arch.sh
