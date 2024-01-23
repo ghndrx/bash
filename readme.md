@@ -4,13 +4,13 @@ This repository contains a collection of scripts that I have created for various
 
 ## Table of Contents
 
-- [Script 1](./scripts/enable-multilib.sh)
-- [Script 2](./scripts/install-bluetooth-arch.sh)
-- [Script 3](./scripts/install-docker-arh.sh)
-- [Script 4](./scripts/install-nfs.sh)
-- [Script 5](./scripts/install-terraform-arch.sh)
-- [Script 6](./scripts/install-yay-arch.sh)
-- [Script 7](./scripts/snapshot-arch.sh)
+- [enable-multilib.sh](./scripts/enable-multilib.sh)
+- [install-bluetooth-arch.sh](./scripts/install-bluetooth-arch.sh)
+- [install-docker-arh.sh](./scripts/install-docker-arh.sh)
+- [install-nfs.sh](./scripts/install-nfs.sh)
+- [install-terraform-arch.sh](./scripts/install-terraform-arch.sh)
+- [install-yay-arch.sh](./scripts/install-yay-arch.sh)
+- [snapshot-arch.sh](./scripts/snapshot-arch.sh)
 
 ## Usage
 
